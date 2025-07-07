@@ -55,7 +55,16 @@ export const doLogin = async ({ email, password }: LoginRequestBody) => {
     };
 
     const token = await createJwtToken(tokenData, "1d");
-    return { status: true, message: "Login success", token };
+    return {
+      status: true,
+      message: "Login success",
+      user: {
+        id: user._id.toString(),
+        name: user.name,
+        email: user.email,
+        token,
+      },
+    };
   } catch (error) {
     if (error instanceof Error) {
       return { status: false, message: error.message };

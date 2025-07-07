@@ -3,6 +3,7 @@ import React, { useActionState, useEffect } from "react";
 import { LoginActionState } from "../types";
 import { loginAction } from "@/app/auth/login/action";
 import { useRouter } from "next/navigation";
+import { useUser } from "../context/UserContext";
 
 function LoginForm() {
   const router = useRouter();
@@ -16,11 +17,16 @@ function LoginForm() {
     initialState
   );
 
+  const { setUser } = useUser();
+
   useEffect(() => {
     if (state.success) {
+      if (state.user) {
+        setUser(state.user);
+      }
       router.push("/");
     }
-  }, [state, router]);
+  }, [state, router, setUser]);
 
   return (
     <form action={formAction} className="max-w-sm mx-auto min-w-[400px] mt-10">

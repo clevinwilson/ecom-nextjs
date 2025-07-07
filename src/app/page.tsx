@@ -1,4 +1,4 @@
-import Cards from "@/components/ui/Cards";
+import ProductListing from "@/components/ui/ProductListing";
 import Navbar from "@/components/ui/Navbar";
 import "flowbite";
 import Image from "next/image";
@@ -22,11 +22,7 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="flex flex-wrap justify-around">
-          <Cards />
-          <Cards />
-          <Cards />
-        </div>
+        <ProductListing />
       </section>
     </>
   );

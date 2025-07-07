@@ -27,7 +27,7 @@ export const loginAction = async (
       return { success: false, message: "Login failed", errors: {} };
     }
 
-    (await cookies()).set("token", res.token, {
+    (await cookies()).set("token", res.user.token, {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 7,
     });
@@ -35,6 +35,7 @@ export const loginAction = async (
     return {
       success: true,
       message: "Signup successful",
+      user: res.user,
       errors: {},
     };
   } catch (error: unknown) {

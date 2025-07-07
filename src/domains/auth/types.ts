@@ -25,4 +25,22 @@ export type LoginActionState = {
     email?: string[];
     password?: string[];
   };
+  user?: {
+    id: string,
+    name: string,
+    email: string,
+    token: string
+  }
+};
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  token: string;
+};
+
+export type UserContextType = {
+  user: User | null;
+  setUser: (user: User | null) => void;
 };
