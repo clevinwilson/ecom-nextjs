@@ -18,3 +18,12 @@ export const createProduct = async (productDetails) => {
     return null;
   }
 };
+
+export const fetchAllProducts = async () => {
+  try {
+    await connectDB();
+    return await Product.find();
+  } catch (error) {
+    return null;
+  }
+};

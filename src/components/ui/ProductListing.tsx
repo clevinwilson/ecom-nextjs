@@ -1,12 +1,16 @@
 import React from "react";
 import Cards from "./Cards";
+import { fetchAllProducts } from "@/domains/products/services/productService";
 
-function ProductListing() {
+export const revalidate = 10;
+
+async function ProductListing() {
+  const products = await fetchAllProducts();
   return (
     <div className="flex flex-wrap justify-around">
-      <Cards />
-      <Cards />
-      <Cards />
+      {products?.map((product, index) => {
+        return <Cards product={product} key={index} />;
+      })}
     </div>
   );
 }
