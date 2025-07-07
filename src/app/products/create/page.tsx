@@ -16,7 +16,6 @@ function CreateProductPage() {
   const [images, setImages] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const { user } = useUser();
   const router = useRouter();
 
@@ -33,8 +32,8 @@ function CreateProductPage() {
       if (res) {
         router.push("/");
       }
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : String(error));
     } finally {
       setLoading(false);
     }
@@ -55,7 +54,6 @@ function CreateProductPage() {
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Create Product</h2>
         {error && <div className="mb-4 text-red-600">{error}</div>}
-        {success && <div className="mb-4 text-green-600">{success}</div>}
         <div className="p-5 bg-gray-100 rounded">
           <label className="block mb-2 font-medium">Product Images (4)</label>
           <input

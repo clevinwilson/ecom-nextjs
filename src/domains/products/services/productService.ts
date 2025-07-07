@@ -14,7 +14,7 @@ export const createProduct = async (productDetails) => {
     });
 
     return await newProduct.save();
-  } catch (error) {
+  } catch {
     return null;
   }
 };
@@ -23,7 +23,16 @@ export const fetchAllProducts = async () => {
   try {
     await connectDB();
     return await Product.find();
-  } catch (error) {
+  } catch {
+    return null;
+  }
+};
+
+export const fetchProductById = async (id) => {
+  try {
+    await connectDB();
+    return await Product.findById(id);
+  } catch {
     return null;
   }
 };
