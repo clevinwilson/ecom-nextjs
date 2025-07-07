@@ -3,6 +3,7 @@
 import { useUser } from "@/domains/auth/context/UserContext";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
 function CreateProductPage() {
@@ -17,6 +18,7 @@ function CreateProductPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { user } = useUser();
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -28,7 +30,9 @@ function CreateProductPage() {
         userId: user?.id,
         ...form,
       });
-      console.log(res);
+      if (res) {
+        router.push("/");
+      }
     } catch (error: any) {
       setError(error.message);
     } finally {
