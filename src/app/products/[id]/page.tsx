@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 const ProductDetailsPage = async ({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) => {
   const { id } = await params;
   const product = await fetchProductById(id);
@@ -36,7 +36,6 @@ const ProductDetailsPage = async ({
       <p>
         <strong>Quantity:</strong> {product.quantity}
       </p>
-      {/* Add more product details as needed */}
     </div>
   );
 };
