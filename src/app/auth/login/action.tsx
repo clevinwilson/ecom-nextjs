@@ -3,7 +3,6 @@
 import { doLogin } from "@/domains/auth/services/authService";
 import { LoginActionState } from "@/domains/auth/types";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export const loginAction = async (
   prevState: LoginActionState,
@@ -26,6 +25,13 @@ export const loginAction = async (
     if (!res.status) {
       return { success: false, message: "Login failed", errors: {} };
     }
+    if (!res.user) {
+      return {
+        success: false,
+        message: "User not found in response",
+        errors: {},
+      };
+    }
 
     (await cookies()).set("token", res.user.token, {
       httpOnly: true,
@@ -38,7 +44,7 @@ export const loginAction = async (
       user: res.user,
       errors: {},
     };
-  } catch (error: unknown) {
+  } catch {
     return { success: false, message: "Login failed", errors: {} };
   }
 };
